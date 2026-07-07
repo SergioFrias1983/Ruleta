@@ -1,0 +1,88 @@
+Build1=Ruleta,com.example.ruleta
+Group=Default Group
+Library1=core
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>~\n~)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=0
+NumberOfLibraries=1
+NumberOfModules=1
+Version=9.801
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Ruleta
+	#VersionCode: 1
+	#VersionName: 1.0
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: True
+#End Region
+
+Sub Process_Globals
+End Sub
+
+Sub Globals
+	Private lblTitle As Label
+	Private lblResult As Label
+	Private btnSpin As Button
+	Private numbers() As String = Array As String("0", "32", "15", "19", "4", "21", "2", "25", "17", "34", "6", "27", "13", "36", "11", "30", "8", "23", "10", "5", "24", "16", "33", "1", "20", "14", "31", "9", "22", "18", "29", "7", "28", "12", "35", "3", "26")
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.Color = Colors.RGB(18, 96, 54)
+	CreateLayout
+End Sub
+
+Sub Activity_Resume
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+End Sub
+
+Private Sub CreateLayout
+	lblTitle.Initialize("")
+	lblTitle.Text = "Ruleta"
+	lblTitle.TextColor = Colors.White
+	lblTitle.TextSize = 32
+	lblTitle.Gravity = Gravity.CENTER
+	Activity.AddView(lblTitle, 0dip, 32dip, 100%x, 56dip)
+
+	lblResult.Initialize("")
+	lblResult.Text = "Presiona Girar"
+	lblResult.TextColor = Colors.White
+	lblResult.TextSize = 42
+	lblResult.Gravity = Gravity.CENTER
+	Activity.AddView(lblResult, 10dip, 130dip, 100%x - 20dip, 120dip)
+
+	btnSpin.Initialize("btnSpin")
+	btnSpin.Text = "Girar"
+	btnSpin.TextSize = 24
+	Activity.AddView(btnSpin, 40dip, 300dip, 100%x - 80dip, 64dip)
+End Sub
+
+Private Sub btnSpin_Click
+	Dim index As Int = Rnd(0, numbers.Length)
+	Dim value As String = numbers(index)
+	lblResult.Text = value & " - " & GetColorName(value)
+	lblResult.TextColor = GetNumberColor(value)
+End Sub
+
+Private Sub GetColorName(value As String) As String
+	If value = "0" Then Return "Verde"
+	If IsRedNumber(value) Then Return "Rojo"
+	Return "Negro"
+End Sub
+
+Private Sub GetNumberColor(value As String) As Int
+	If value = "0" Then Return Colors.RGB(85, 200, 120)
+	If IsRedNumber(value) Then Return Colors.RGB(230, 55, 55)
+	Return Colors.RGB(30, 30, 30)
+End Sub
+
+Private Sub IsRedNumber(value As String) As Boolean
+	Dim redNumbers As String = ",1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36,"
+	Return redNumbers.Contains("," & value & ",")
+End Sub
