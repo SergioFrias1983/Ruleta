@@ -4,8 +4,10 @@ Proyecto base creado para abrirse y ejecutarse con el IDE B4A (Basic for Android
 
 ## Archivos principales
 
+
 - `Ruleta.b4a`: proyecto principal de B4A con la cabecera de metadatos requerida por el IDE y una Activity simple.
 - `Starter.bas`: servicio Starter estándar usado por proyectos B4A recientes.
+- `Ruleta.b4a`: proyecto principal de B4A con una Activity simple.
 - `.gitkeep`: marcador original del repositorio.
 
 ## Cómo abrirlo en B4A
