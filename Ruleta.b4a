@@ -1,3 +1,16 @@
+
+Build1=Ruleta,com.example.ruleta
+Group=Default Group
+Library1=core
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="28"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>~\n~)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.DarkTheme)~\n~'End of default text.~\n~
+Module1=Starter
+NumberOfFiles=0
+NumberOfLibraries=1
+NumberOfModules=1
+Version=9.801
+@EndOfDesignText@
+
+
 #Region  Project Attributes 
 	#ApplicationLabel: Ruleta
 	#VersionCode: 1
@@ -12,7 +25,10 @@
 #End Region
 
 Sub Process_Globals
+
+
 	Private xui As XUI
+
 End Sub
 
 Sub Globals
@@ -23,7 +39,11 @@ Sub Globals
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
+
+	Activity.Color = Colors.RGB(18, 96, 54)
+
 	Activity.Color = xui.Color_RGB(18, 96, 54)
+
 	CreateLayout
 End Sub
 
@@ -36,14 +56,22 @@ End Sub
 Private Sub CreateLayout
 	lblTitle.Initialize("")
 	lblTitle.Text = "Ruleta"
+
+	lblTitle.TextColor = Colors.White
+
 	lblTitle.TextColor = xui.Color_White
+
 	lblTitle.TextSize = 32
 	lblTitle.Gravity = Gravity.CENTER
 	Activity.AddView(lblTitle, 0dip, 32dip, 100%x, 56dip)
 
 	lblResult.Initialize("")
 	lblResult.Text = "Presiona Girar"
+
+	lblResult.TextColor = Colors.White
+
 	lblResult.TextColor = xui.Color_White
+
 	lblResult.TextSize = 42
 	lblResult.Gravity = Gravity.CENTER
 	Activity.AddView(lblResult, 10dip, 130dip, 100%x - 20dip, 120dip)
@@ -68,9 +96,15 @@ Private Sub GetColorName(value As String) As String
 End Sub
 
 Private Sub GetNumberColor(value As String) As Int
+
+	If value = "0" Then Return Colors.RGB(85, 200, 120)
+	If IsRedNumber(value) Then Return Colors.RGB(230, 55, 55)
+	Return Colors.RGB(30, 30, 30)
+
 	If value = "0" Then Return xui.Color_RGB(85, 200, 120)
 	If IsRedNumber(value) Then Return xui.Color_RGB(230, 55, 55)
 	Return xui.Color_RGB(30, 30, 30)
+
 End Sub
 
 Private Sub IsRedNumber(value As String) As Boolean
